@@ -1,0 +1,16 @@
+body {
+    color: #dfccd3;
+}
+
+.toc {
+    background-color: #3f3136;
+    color: #ded0d5;
+}
+
+::selection {
+    background: #752e47;
+}
+
+::-moz-selection {
+    background: #752e47;
+}

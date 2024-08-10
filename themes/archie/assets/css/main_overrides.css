@@ -1,0 +1,17 @@
+
+article .title {
+    margin-bottom: 0.2em;
+}
+
+.meta {
+    font-size: smaller;
+}
+
+.tldr {
+    font-size: small;
+    color: #CCC;
+}
+
+.toc {
+    margin: 1em 0;
+}

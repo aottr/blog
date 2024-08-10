@@ -1,0 +1,59 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'aottr'
+theme = 'archie'
+copyright = "© A.Ottr"
+
+# Code Highlight
+pygmentsstyle = "monokai"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+paginate = 20 # articles per page
+
+[params]
+	mode="dark" # color-mode → light,dark,toggle or auto
+	useCDN=true # don't use CDNs for fonts and icons, instead serve them locally.
+	subtitle = "Thoughts on software development, data science, and other things."
+	mathjax = false # enable MathJax support
+	katex = false # enable KaTeX support
+    customcss = ["css/main_overrides.css", "css/dark_overrides.css"]
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url = "https://github.com/aottr"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/alexottr/"
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "All posts"
+url = "/posts"
+weight = 2
+
+# [[menu.main]]
+# name = "About"
+# url = "/about"
+# weight = 3
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 4
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
