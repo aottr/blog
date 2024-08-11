@@ -15,3 +15,7 @@ article .title {
 .toc {
     margin: 1em 0;
 }
+
+img {
+    border:0;
+}
