@@ -176,3 +176,7 @@ The last step is to add the newly generated Task to the scheduler via `addTask` 
 We don't have to redefine complex sub-functions inside the callback, it just works.
 
 I hope this long article was interesting, helpful or entertaining. As usual feel free to ask in the comments and I'll answer asap and adjust the article :3
+
+## Done reading?
+
+I wrote an updated article about [Improving the simple scheduler](/posts/2021/09-12-simple-scheduler-discord-bot-part-2/).
