@@ -10,6 +10,13 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 paginate = 20 # articles per page
+summaryLength = 30
+
+disableHugoGeneratorInject = true
+enableGitInfo = false
+enableRobotsTXT = true
+
+removePathAccents = true
 
 [params]
 	mode="dark" # color-mode → light,dark,toggle or auto
@@ -60,3 +67,9 @@ weight = 4
   disableSVG = false
   disableXML = false
   minifyOutput = true
+
+[permalinks]
+  [permalinks.page]
+    posts = '/posts/:year/:month/:slug/'
+  [permalinks.section]
+    posts = '/posts/'
