@@ -1,8 +1,8 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://aottr.dev/'
 languageCode = 'en-us'
 title = 'aottr'
 theme = 'archie'
-copyright = "© A.Ottr"
+copyright = "AlexOttr"
 
 # Code Highlight
 pygmentsstyle = "monokai"

@@ -1,12 +1,11 @@
-<footer>
+<footer style="display:flex; flex-direction: row;">
+  <div class="footer-info" style="flex-grow: 1;">
+    Copyright 2023-{{ dateFormat "2006" now }} {{ with .Site.Copyright }} {{ . }} {{ end }}
+  </div>
   <div style="display:flex">
     {{- range $index, $key := .Site.Params.Social -}}
     <a class="soc" href="{{ $key.url }}" rel="me" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a>
-    <a class="border"></a>
     {{- end -}}
-  </div>
-  <div class="footer-info">
-    {{ dateFormat "2006" now }} {{ with .Site.Copyright }} {{ . }} | {{ end }}
   </div>
 </footer>
 {{ if not hugo.IsServer }}
