@@ -1,6 +1,6 @@
 <header>
 	<div class="main">
-		<a href="{{ absURL "/" }}">{{ .Site.Title }}</a>
+		<a href="{{ absURL "/" }}"><i data-feather="coffee" stroke-width="3"></i>{{ .Site.Title }}</a>
 	</div>
 	<nav>
 		{{ range .Site.Menus.main }}
@@ -10,6 +10,6 @@
         | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
 		<script src="{{ absURL "js/themetoggle.js" }}"></script>
 		{{ end }}
-		<a href="{{ absURL "index.xml" }}"><i data-feather="rss"></i></a>
+		<a href="{{ absURL "index.xml" }}"><i data-feather="rss" stroke-width="3"></i></a>
 	</nav>
 </header>
