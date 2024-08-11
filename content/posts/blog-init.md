@@ -5,7 +5,7 @@ tags = ['intro']
 +++
 
 ## What is this blog?
-I started writing articles back in 2012, ranging from travel logs to programming tutorials in PHP. I enjoy writing texts here and then when I find (or dont find) certain things that might be interesting for others. All those articles I wrote in the past years were spread over different platforms, including self-written blog websites using flatfile storage...
+I started writing articles back in 2012, ranging from travel logs to programming tutorials in PHP. I enjoy writing texts here and then when I find (or don't find) certain things that might be interesting for others. All those articles I wrote in the past years were spread over different platforms, including self-written blog websites using flatfile storage...
 
 A lot of these platforms, including Medium, Patreon and Ko-Fi are missing fundamentals like syntax highlighting without using screenshots or github gists, which can be very annoying considering the type of content I focus on. Other platforms have such a big overhead, that it got annoying updating, handling and keeping track, since I'm only doing such articles when I'm feeling like it.
 

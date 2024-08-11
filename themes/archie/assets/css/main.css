@@ -283,6 +283,15 @@ content: "js";
 background: #f7df1e;
 color: black;
 }
+
+
+.highlight pre code[class=language-TypeScript]::before,
+.highlight pre code[class="language-ts"]::before {
+content: "TS";
+background: #1a78bd;
+color: white;
+}
+
 .highlight pre code[class*='language-yml']::before,
 .highlight pre code[class*='language-yaml']::before {
 content: 'yaml';
