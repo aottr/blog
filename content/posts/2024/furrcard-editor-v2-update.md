@@ -1,7 +1,7 @@
 +++
 title = 'The FurrCard EditorV2 is finally here'
 date = 2024-08-12T02:09:43+02:00
-draft = true
+draft = false
 tags = ['furrcard']
 +++
 
