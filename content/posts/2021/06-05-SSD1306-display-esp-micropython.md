@@ -2,7 +2,9 @@
 title = 'Drawing content on SSD1306 displays with ESP and micropython'
 date = 2021-06-05T17:14:26+02:00
 draft = false
-tags = ['hardware', 'SSD1306', 'ESP8266', 'micropython']
+tags = ['hardware', 'python']
+keywords = ['ESP32', 'SSD1306', 'ESP8266', 'micropython']
+images = ['https://storage.ko-fi.com/cdn/useruploads/display/bce49277-59e9-4671-a980-75a3767d60e5_img_2335.jpeg']
 +++
 
 > ***Disclaimer:*** This article has been imported from Ko-Fi with limited syntax highlighting capabilities and might be updated in the future to better showcase the code.

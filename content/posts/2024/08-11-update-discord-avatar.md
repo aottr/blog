@@ -4,6 +4,7 @@ date = 2024-08-11T14:37:28+02:00
 draft = false
 tags = ['nextjs', 'prisma', 'furrcard', 'discord', 'backend']
 tldr = 'Since the discord avatar url changes on every change, I decided to update the user avatar in the database on each login.'
+images = ['https://i.imgur.com/B65reAe.png']
 +++
 
 Since I don't want to handle with emails and passwords on [FurrCard](https://furrcard.com), I solely rely on common oauth providers like Discord and GitHub for authentication. A popular solution for oauth authentication in nextjs is Auth.js (formerly next-auth) which supports (and somewhat encourages) persisting sessions in a database using the prisma-adapter.

@@ -18,6 +18,9 @@ paginate = 20 # articles per page
 	mathjax = false # enable MathJax support
 	katex = false # enable KaTeX support
     customcss = ["css/main_overrides.css", "css/dark_overrides.css"]
+  
+  og_image = ""
+  favicon = ""
 
 [[params.social]]
 name = "GitHub"

@@ -1,7 +1,7 @@
 +++
 title = 'Blog Init'
 date = 2024-08-10T15:41:20+02:00
-tags = ['intro']
+tags = ['site-update']
 +++
 
 ## What is this blog?
