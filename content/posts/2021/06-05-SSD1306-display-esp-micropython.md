@@ -21,7 +21,7 @@ There are libraries for that purpose to draw simple text and shapes on that disp
 After I agreed to take a look at it we both take a weekend off to tinker about it. It was that weekend I wrote the Syna framework. This shouldn't be any kind of advertisement, the code is licensed under MIT and free to use / modify :D I just want to give a little introduction in how to use it properly and maybe it will help you with your next project. 
 
 
-At first I thought about what the main functionality of a user interface should be...
+At first, I thought about what the main functionality of a user interface should be...
 - **show** (to actually display the content)
 - **up** and **down** (for navigating by turning e.g. a rotary encoder)
 - **click** (as some kind of ENTER or confirmation)

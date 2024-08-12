@@ -11,9 +11,9 @@ This is the second part covering the simple scheduler script. In case you didn't
 
 Our first attempt to schedule tasks inside our Discord bot contained a lot of clutter and unused variables / parameters. After giving the scheduler a second thought and re-reading my own article about it, I wanted to improve the code a bit and make it more tidy and clean.
 
-At first we gonna take a look at the `Task` class, our data model. The old model contained a lot of business logic since the rest of the scheduler was purely functional coded.
+At first, we gonna take a look at the `Task` class, our data model. The old model contained a lot of business logic since the rest of the scheduler was purely functional coded.
 
-The only consistent parameters for a task are the name (for identification) and the callback-function we want to run. Therefore we can strip the constructor to only two parameters.
+The only consistent parameters for a task are the name (for identification) and the callback-function we want to run. Therefore, we can strip the constructor to only two parameters.
 
 ```js
 class Task {
@@ -66,7 +66,7 @@ get interval() {
     return this._interval;
 }
 ```
-This allows us to have a public read-only access to the internal variables that looks similar to the access of regular object properties.
+This allows us to have public read-only access to the internal variables that looks similar to the access of regular object properties.
 
 **If you want me to write a separate article about ES6 classes in JavaScript and TypeScript, leave a comment below :3**
 
@@ -135,11 +135,11 @@ class Scheduler {
                 }
             }, this.interval
         )
-    }
+    };
 
     add(task) {
         this.tasks.set(task.name, task);
-    }
+    };
 }
 ```
 

@@ -39,7 +39,7 @@ The next command will upload the earlier downloaded firmware to the devices flas
 
 This command looks very similar to the command earlier, the difference is the action we process on the device `write_flash` with the argument `-z` followed by the start address `0x1000` and the path to the binary.
 
-We can now test the set up board by establishing a serial connection via a terminal emulator like [picocom](https://github.com/npat-efault/picocom) to the device.
+We can now test the setup board by establishing a serial connection via a terminal emulator like [picocom](https://github.com/npat-efault/picocom) to the device.
 
 {{<figure src="https://i.imgur.com/kaqmmKI.png">}}
 
