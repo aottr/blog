@@ -8,11 +8,11 @@ tags = ['nixos', 'security', 'homelab']
 tldr = 'While round robin DNS works, split DNS feels more sophisticated and is easy to set up.'
 +++
 
-Yesterday, I showed how I set up my home server with caddy to retrieve SSL certificates and serve my self-hosted 
-services like paperless-ngx and Jellyfin on human-readable domain names with SSL encryption.
+Yesterday, I showed [how I set up my home server with caddy to retrieve SSL certificates](/posts/2024/08/homelab-setting-up-caddy-reverse-proxy-with-ssl-on-nixos/) and serve my self-hosted 
+services like _paperless-ngx_ and _Jellyfin_ on **human-readable domain names with SSL encryption.**
 
 Let's say you're somewhere outside with friends or generally not in your home network, and you want to access some of
-your services at home to scan a receipt for paperless or listen to your music library.
+your services at home to scan a receipt for _paperless_ or listen to your music library.
 
 Exposing those services to the internet is no option to me personally, even though the services I'm using have a built-in authentication,
 I simply prefer to keep the number of access-points to my local network small. It would also go against the DNS entries we
@@ -31,16 +31,16 @@ On NixOs, we obviously use the [tailscale package](https://search.nixos.org/pack
 ```
 After the next rebuild, we just start the service **once** with `sudo tailscale up` and authenticate, they even have it documented on their [download page](https://tailscale.com/download/linux/nixos).
 
-We basically want to add all clients that are supposed to connect to our homelab in the same wireguard mesh (called tailnet) with tailscale.
-Once we're done, we navigate to the [Admin console](https://login.tailscale.com/admin/machines) and check if all our devices are present and have the *Last Seen* status of `Connected`. Tailscale also automatically enables a *Key expiry* with a maximum validity of 180days, I personally have this disabled for my homelab since it would ask me to re-authenticate those machines. *You can disable it in the 'Machine settings' by selecting 'Disable key expiry'.* It is generally advised to keep it activated on *less trusted* machines, like VPS. Bear in mind though, that you **won't be able to connect** to _expired_ machines through the _tailnet_.
+We basically want to add all clients that are supposed to connect to our homelab in the same _wireguard_ mesh (called _tailnet_) with _tailscale_.
+Once we're done, we navigate to the [Admin console](https://login.tailscale.com/admin/machines) and check if all our devices are present and have the ***Last Seen*** status of `Connected`. _Tailscale_ also automatically enables a ***Key expiry*** with a maximum validity of _180days_, I personally have this disabled for my homelab since it would ask me to re-authenticate those machines. *You can disable it in the 'Machine settings' by selecting 'Disable key expiry'.* It is generally advised to keep it activated on *less trusted* machines, like VPS. Bear in mind though, that you **won't be able to connect** to **_expired_** machines through the _tailnet_.
 
-We now have a vpn between our *possible* remote devices and the homelab in the subnet `100.0.0.0/8`, and can access our services via the port (e.g. `100.24.1.24:8096` for jellyfin), if the `openPort` directive is enabled for the service. What we **can not** do so far, is using our defined fqdn to access the service, since the DNS entry points at the private address in a different subnet (our local network).
+We now have a vpn between our *possible* remote devices and the homelab in the subnet `100.0.0.0/8`, and can access our services via the port (e.g. `100.24.1.24:8096` for _Jellyfin_), if the `openPort` directive is enabled for the service. What we **can not** do so far, is using our defined fqdn to access the service, since the DNS entry points at the private address in a different subnet (our local network).
 
 ## Ways of accessing our services via domain
 There are several ways of making it possible to use our domain names for accessing the services, each comes with their own pros and cons. Those include:
 - Propagating the local network to the _tailnet_
-- Round-Robin DNS with a second dns entry per domain
-- Split DNS with a local DNS resolver
+- **Round-Robin DNS** with a second dns entry per domain
+- **Split DNS** with a local DNS resolver
 
 Since I have multiple external servers in my _tailnet_, I don't feel like propagating my local addresses, even with several **ACL**-rules enabled. 
 
@@ -49,7 +49,7 @@ The configuration of a [round-robin DNS](https://developers.cloudflare.com/dns/m
 
 **Considerations:**
 - Round-robin is very _primitive_ and the resolver doesn't know if we are accessing from our vpn or the local network.
-- This results in the possibility of some requests receiving the *wrong* answer, elevated by DNS cache.
+- This results in the possibility of some **requests receiving the *wrong* answer**, elevated by DNS cache.
 - While [tailscale states that this is generally safe](https://tailscale.com/kb/1019/subnets#route-dns-lookups-to-an-internal-dns-server) to do, this approach plays against the general idea of round-robin since one of the ip addresses is always not reachable.
 
 ### Split DNS (Split-horizon)

@@ -107,6 +107,7 @@ figure h4::before {
 code {
   background-color: #f1f1f1;
   padding: .1em .2em;
+  font-size: 15px;
 }
 
 pre {
@@ -224,6 +225,8 @@ article .title {
   background-color: var(--callouctcolor);
   color: #fff;
   padding: 1em;
+  font-family: "Nunito", 'Fira Sans', sans-serif;
+  font-size: 1.1rem;
 }
 
 .callout p {
