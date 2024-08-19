@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(/fonts/Nunito.ttf) format('truetype');
+    }
+}
+
+body {
+    @apply bg-stone-800 h-full min-h-screen;
+    @apply text-pink-100/90 font-mono;
+}
+
+header {
+    @apply w-full max-w-4xl mx-auto p-4;
+    @apply flex flex-row items-center;
+} 
+
+main {
+    @apply w-full max-w-4xl mx-auto p-4;
+}
+
+footer {
+    @apply w-full max-w-4xl mx-auto p-4;
+    @apply text-stone-400 text-sm;
+}
+header h1 a, header h1 a:visited {
+    @apply flex flex-row items-center gap-2;
+    @apply text-pink-300;
+}
+header h1, header h1::before {
+    @apply text-2xl font-bold;
+    content: none;
+}
+
+header nav {
+    @apply flex-grow;
+}
+
+header nav ul {
+    @apply flex flex-row justify-end gap-3;
+}
+
+header nav ul li a, 
+header nav ul li a:visited, 
+header nav ul li::before {
+    @apply text-pink-300;
+    @apply border-b-4 border-pink-300;
+    content: none
+}
+
+a {
+    @apply text-pink-300;
+}
+
+a:hover, a:visited:hover {
+    @apply bg-pink-300 text-stone-900;
+}
+
+header nav ul li svg:hover {
+    @apply bg-pink-300 text-stone-900;
+}
+
+header nav ul li svg {
+    @apply h-7 w-7;
+}
+
+a:visited {
+    @apply text-fuchsia-400;
+}
+
+/* Typography */
+
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+    @apply font-bold;
+    @apply text-pink-300;
+}
+
+h1::before { content: '# '; }
+h2::before { content: '## '; }
+h3::before { content: '### '; }
+h4::before { content: '#### '; }
+h5::before { content: '##### '; }
+h6::before { content: '###### '; }
+
+h1 { @apply text-2xl; }
+h2 { @apply text-xl; }
+h3 { @apply text-lg; }
+
+h1, h2, h3, h4, h5, h6 {
+    @apply mt-7 mb-3
+}
+
+/* Single page header */
+main h1:first-of-type {
+    @apply my-0;
+}
+
+main p {
+    @apply my-3;
+    @apply font-sans;
+    font-size: large;
+}
+
+main p code {
+    @apply bg-stone-700 text-sm text-stone-300;
+    @apply rounded-md;
+    @apply px-1 py-0.5;
+}
+
+.meta {
+    @apply text-sm text-stone-400;
+    @apply font-mono;
+}
+
+.tldr {
+    @apply text-sm text-stone-400 my-2;
+}
+
+.toc {
+    @apply rounded-lg bg-stone-700/30 p-2.5 w-fit my-6;
+    @apply flex flex-col gap-1 items-start;
+}
+
+.toc nav {
+    @apply inline-block
+}
+
+.callout {
+    @apply text-stone-300  bg-stone-700 shadow-stone-900;
+    @apply p-2.5 my-4;
+    @apply rounded-lg;
+}
+.callout-inner {
+    @apply flex flex-row gap-4 items-center text-sm;
+}
+.callout-inner p {
+    @apply text-base my-0;
+}
+
+.callout-inner .icon {
+    @apply w-8 h-8 stroke-current flex-none;
+}
+
+ul {
+    @apply list-none pl-2;
+}
+ul > li {
+    @apply font-sans;
+}
+ul > li::before {
+    content: '* ';
+    @apply font-bold text-pink-300 font-mono;
+}
+
+.tag-cloud ul > li::before {
+    content: '🏷 ';
+    @apply font-bold text-pink-300 font-mono;
+}
+
+strong {
+    @apply font-extrabold;
+}
+
+.highlight {
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+.highlight pre code[class*="language-"] {
+    -webkit-overflow-scrolling: touch;
+}
+
+.highlight pre {
+    @apply bg-stone-800 border-2 border-stone-700;
+    @apply rounded-lg text-sm p-4;
+}
+
+.highlight pre code[class*="language-"]::before {
+    @apply rounded-tr-lg rounded-bl-lg;
+    @apply text-xs text-white bg-black font-mono uppercase;
+    letter-spacing: 0.025rem;
+    @apply py-1 px-2 absolute top-0 right-0;
+    text-align: right;
+}
+
+.highlight pre code[class*='language-nix']::before,
+.highlight pre code[class*='language-nix']::before{
+    content: 'nix';
+    background: #4b7bc0;
+    color: whitesmoke ;
+}
+
+.highlight pre code[class*='language-caddy']::before,
+.highlight pre code[class*='language-caddy']::before{
+    content: 'caddy';
+    background: #021727;
+    color: #4da6d9;
+}
+
+.highlight pre code[class=language-javaScript]::before,
+.highlight pre code[class="language-js"]::before {
+    content: "js";
+    background: #f7df1e;
+    color: black;
+}
+
+
+.highlight pre code[class=language-TypeScript]::before,
+.highlight pre code[class="language-ts"]::before {
+    content: "TS";
+    background: #1a78bd;
+    color: white;
+}
+
+.highlight pre code[class*='language-yml']::before,
+.highlight pre code[class*='language-yaml']::before {
+    content: 'yaml';
+    background: #f71e6a;
+    color: white;
+}
+.highlight pre code[class*='language-shell']::before,
+.highlight pre code[class*='language-bash']::before,
+.highlight pre code[class*='language-sh']::before {
+    content: 'shell';
+    background: green;
+    color:white
+}
+.highlight pre code[class*='language-json']::before{
+    content: 'json';
+    background: dodgerblue;
+    color: #000000 
+}
+.highlight pre code[class*='language-python']::before,
+.highlight pre code[class*='language-py']::before {
+    content: 'py';
+    background: #2b688d;
+    color: white;
+}
+.highlight pre code[class*='language-css']::before{
+    content: 'css';
+    background: cyan;
+    color: black ;
+}
+.highlight pre code[class*='language-go']::before{
+    content: 'Go';
+    background: cyan;
+    color: royalblue ;
+}
+
+main figure {
+    @apply px-5 py-3;
+}
+
+main figure img {
+    max-height: 500px;
+}
+
+main figure h4 {
+    @apply text-sm text-stone-400;
+    @apply m-0 mb-2;
+}
+main figure h4::before {
+    @apply text-sm text-stone-400;
+    content: '↳ ';
+}
+
+.post-tags {
+    @apply my-4;
+}
+
+.post-tags ul {
+    @apply flex flex-wrap gap-2 mt-2;
+}
+
+.post-tags ul li a {
+    @apply bg-stone-700 text-stone-300 font-mono;
+    @apply rounded-lg px-2 py-1;
+}
+.post-tags ul li a:hover {
+    @apply bg-pink-300 text-stone-900;
+}
+
+.post-tags ul li::before {
+    content: none;
+}
+
+h1.page-title {
+    @apply mb-4 !important;
+}
+
+.home-post div.title::before {
+    content: '* ';
+}
+
+.home-post div.title time {
+    @apply text-stone-400 text-xs font-mono;
+}
+
+.home-post p {
+    @apply m-0 text-xs text-stone-300 font-mono;
+    @apply pl-5;
+}
+
+.pagination {
+    @apply flex flex-row gap-2 justify-center;
+    @apply my-4;
+}

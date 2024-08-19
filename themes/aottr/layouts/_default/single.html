@@ -1,0 +1,39 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+  {{ $dateHuman := .Date | time.Format ":date_long" }}
+  <div class="meta">
+    <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>, {{ .WordCount }} words, {{ .ReadingTime }} minutes to read
+  </div>
+
+  {{ if isset .Params "tldr" }}
+    <div class="tldr">
+      <strong>TL;DR:</strong>
+      {{ .Params.tldr }}
+    </div>
+  {{ end }}
+
+  {{ if isset .Params "toc" }}
+    <div class="toc">
+      <strong>Table of contents:</strong>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+
+  {{ .Content }}
+  <div class="post-tags">
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  </div>
+</article>
+  <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me', '#3c2642', 'Z8Z556EIM');kofiwidget2.draw();</script> 
+
+	<script src="https://utteranc.es/client.js"
+        repo="aottr/blog"
+        issue-term="title"
+        label="comment"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+	</script>
+{{ end }}

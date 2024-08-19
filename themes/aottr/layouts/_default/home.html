@@ -1,0 +1,30 @@
+{{ define "main" }}
+  {{ .Content }}
+
+  <div class="w-full flex flex-col md:flex-row gap-6">
+    <div class="grow flex flex-col gap-4">
+      <div class="text-4xl font-bold">Hi, I'm Alex! {{ ":coffee:" | .RenderString }}</div>
+      <div class="text-lg text-stone-300">I'm a software and devops engineer, living in France. Expect some posts about <span class="italic">software engineering,
+        devops</span> and other tech-related topics. I'm using NixOS btw.
+      </div>
+      <div class="text-sm text-stone-400">
+        Subscribe to my <a href="{{ absURL "/" }}index.xml">RSS feed</a> or follow me on <a href="https://furry.engineer/@alex">mastodon</a> to get the latest updates!
+      </div>
+    </div>
+    <img src="{{ absURL "/" }}img/aottr.png" alt="Otter" class="flex-none invisible size-0 md:visible md:size-64" />
+  </div>
+
+  <h2>Recent Posts</h2>
+  {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+  {{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
+  {{ range $paginator.Pages }}
+    <div class="home-post">
+      <div class="title">
+        <time>[{{ time.Format "2006-01-02" .Date }}]</time>
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </div>
+      <p>{{ .Summary }}</p>
+    </div>
+  {{ end }}
+  {{ template "partials/paginator.html" . }}
+{{ end }}

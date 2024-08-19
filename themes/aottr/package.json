@@ -1,0 +1,15 @@
+{
+  "name": "aottr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/main.css -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}

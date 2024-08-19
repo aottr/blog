@@ -1,7 +1,7 @@
 baseURL = 'https://aottr.dev/'
 languageCode = 'en-us'
 title = 'aottr'
-theme = 'archie'
+theme = 'aottr'
 copyright = "AlexOttr"
 
 # Code Highlight
@@ -9,14 +9,15 @@ pygmentsstyle = "monokai"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-paginate = 20 # articles per page
-summaryLength = 30
+paginate = 10 # articles per page
+summaryLength = 20
 
 disableHugoGeneratorInject = true
 enableGitInfo = false
 enableRobotsTXT = true
 
 removePathAccents = true
+enableEmoji = true
 
 [params]
 	mode="dark" # color-mode → light,dark,toggle or auto
