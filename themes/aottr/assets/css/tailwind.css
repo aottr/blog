@@ -179,6 +179,7 @@ strong {
 .highlight pre {
     @apply bg-stone-800 border-2 border-stone-700;
     @apply rounded-lg text-sm p-4;
+    @apply overflow-x-auto;
 }
 
 .highlight pre code[class*="language-"]::before {
