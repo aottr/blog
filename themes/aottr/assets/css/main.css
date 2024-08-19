@@ -1180,6 +1180,7 @@ main figure h4::before {
   padding-right: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+  text-transform: lowercase;
 }
 
 .post-tags ul li a:hover {

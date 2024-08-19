@@ -281,6 +281,7 @@ main figure h4::before {
 .post-tags ul li a {
     @apply bg-stone-700 text-stone-300 font-mono;
     @apply rounded-lg px-2 py-1;
+    @apply lowercase;
 }
 .post-tags ul li a:hover {
     @apply bg-pink-300 text-stone-900;
