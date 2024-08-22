@@ -608,6 +608,10 @@ video {
   visibility: hidden;
 }
 
+.static {
+  position: static;
+}
+
 .relative {
   position: relative;
 }
@@ -904,7 +908,20 @@ main p {
   font-size: large;
 }
 
-main p code {
+main blockquote {
+  border-left-width: 8px;
+  --tw-border-opacity: 1;
+  border-color: rgb(28 25 23 / var(--tw-border-opacity));
+  background-color: rgb(28 25 23 / 0.5);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-style: italic;
+  color: rgb(214 211 209 / 0.8);
+}
+
+main p code, ol > li code, ul > li code {
   --tw-bg-opacity: 1;
   background-color: rgb(68 64 60 / var(--tw-bg-opacity));
   font-size: 0.875rem;
@@ -989,13 +1006,21 @@ main p code {
   stroke: currentColor;
 }
 
-ul {
+ul, ol {
   list-style-type: none;
   padding-left: 0.5rem;
 }
 
-ul > li {
+ul > li, ol > li {
   font-family: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+ol > li {
+  list-style-position: inside;
+  list-style-type: decimal;
+  padding-left: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 ul > li::before {
@@ -1249,3 +1274,4 @@ h1.page-title {
     flex-direction: row;
   }
 }
+

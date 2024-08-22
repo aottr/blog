@@ -108,7 +108,11 @@ main p {
     font-size: large;
 }
 
-main p code {
+main blockquote {
+    @apply bg-stone-900/50 px-6 py-1 italic border-l-8 border-stone-900 text-stone-300/80;
+}
+
+main p code, ol > li code, ul > li code {
     @apply bg-stone-700 text-sm text-stone-300;
     @apply rounded-md;
     @apply px-1 py-0.5;
@@ -148,12 +152,16 @@ main p code {
     @apply w-8 h-8 stroke-current flex-none;
 }
 
-ul {
+ul, ol {
     @apply list-none pl-2;
 }
-ul > li {
+ul > li, ol > li {
     @apply font-sans;
 }
+ol > li {
+    @apply list-decimal pl-2 list-inside text-lg;
+}
+
 ul > li::before {
     content: '* ';
     @apply font-bold text-pink-300 font-mono;
@@ -313,3 +321,4 @@ h1.page-title {
     @apply flex flex-row gap-2 justify-center;
     @apply my-4;
 }
+
