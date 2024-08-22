@@ -12,7 +12,7 @@ One feature that some might not be aware of, at least I didn't see it on a lot o
 
 > **Verifying your identity on Mastodon is for everyone.** [...] All you need is a personal website that people recognize you by. When you link to this website from your profile, we will check that the website links back to your profile and show a visual indicator on it.
 
-This *visual indicator* is a very noticable green box surrounding the link with a checkmark, as shown below.
+This *visual indicator* is a very noticeable green box surrounding the link with a checkmark, as shown below.
 
 {{<figure src="https://i.imgur.com/50nTp6m.png" title="My mastodon account with verified links">}}
 
