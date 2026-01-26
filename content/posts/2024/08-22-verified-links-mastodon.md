@@ -19,14 +19,14 @@ This *visual indicator* is a very noticeable green box surrounding the link with
 The question is now: *How can I add this to my profile?? How does it work?* And the answer is quite simple. All it needs is an html reference to your mastodon profile, containing the profile-url as `href` and `rel="me"`. The best ways, according to the mastodon documentation, are the `link` and `a` tag, while both must be static / visible on first render without javascript.
 
 ```html
-<link href="https://furry.engineer/@alex" rel="me" />
+<link href="https://woof.tech/@aottr" rel="me" />
 ```
 
 This would create an, for the regular user invisible, reference to your mastodon profile. (after you changed the url to your own mastodon ofc...)
 Another, and more staight-forward way, would be just adding the `rel="me"` attribute to existing links to your mastodon account on your personal website or blog. Again, it's important that you are able to edit the html-tag of the link, not just the url.
 
 ```html
-<a href="https://furry.engineer/@alex" rel="me">Mastodon</a>
+<a href="https://woof.tech/@aottr" rel="me">Mastodon</a>
 ```
 You can further check which pages are triggering the verification on your mastodon account by accessing `/settings/verification` (**Edit Profile**->**Verfification**).
 
