@@ -1,0 +1,16 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- $pages := where site.RegularPages "Type" "posts" -}}
+{{- if not $pages -}}
+  {{- $pages = site.RegularPages -}}
+{{- end -}}
+{{- range $pages -}}
+  {{- $.Scratch.Add "index" (dict
+    "title" .Title
+    "content" (.Plain | htmlUnescape)
+    "summary" .Summary
+    "permalink" .Permalink
+    "date" (.Date.Format "2006-01-02")
+    "tags" (.Params.tags | default slice)
+  ) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

@@ -74,3 +74,6 @@ weight = 4
     posts = '/posts/:year/:month/:slug/'
   [permalinks.section]
     posts = '/posts/'
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

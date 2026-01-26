@@ -1,0 +1,206 @@
+/* Search Container - no longer needed, modal is directly in body */
+
+/* Search Toggle Button in Menu - styled like menu items */
+.search-toggle-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(249 168 212);
+  border-bottom-width: 4px;
+  border-color: transparent;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.search-toggle-menu svg {
+  pointer-events: none;
+}
+
+.search-toggle-menu:hover {
+  background-color: rgb(249 168 212);
+  color: rgb(28 25 23);
+}
+
+.search-toggle-menu svg {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+/* Make sure the search button li behaves like other menu items */
+header nav ul li:has(.search-toggle-menu) {
+  display: flex;
+  align-items: center;
+}
+
+/* Search Modal */
+.search-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+
+.search-modal-hidden {
+  display: none !important;
+}
+
+.search-modal-content {
+  background: rgb(28 25 23);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(68 64 60);
+}
+
+/* Search Header */
+.search-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(68 64 60);
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(68 64 60);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: rgb(41 37 36);
+  color: rgb(250 250 249);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: rgb(249 168 212);
+  box-shadow: 0 0 0 3px rgba(249, 168, 212, 0.1);
+}
+
+.search-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(249 168 212);
+}
+
+.search-close:hover {
+  background-color: rgb(249 168 212);
+  color: rgb(28 25 23);
+}
+
+/* Search Results */
+.search-results {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.search-result-item {
+  display: block;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: rgb(250 250 249);
+  border: 1px solid transparent;
+}
+
+.search-result-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgb(249 168 212);
+}
+
+.search-result-item:hover {
+  background-color: rgba(249, 168, 212, 0.25);
+  border-color: rgba(249, 168, 212, 0.3);
+}
+
+.search-result-item:hover .search-result-title,
+.search-result-item:hover .search-result-date,
+.search-result-item:hover .search-result-summary {
+  color: rgb(249 168 212);
+}
+
+.search-result-item:hover .search-tag {
+  background-color: rgb(28 25 23);
+  color: rgb(249 168 212);
+}
+
+.search-result-title mark {
+  background-color: rgb(217 119 6);
+  color: rgb(255 255 255);
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.search-result-item:hover .search-result-title mark {
+  background-color: rgb(28 25 23);
+  color: rgb(249 168 212);
+}
+
+.search-result-date {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: rgb(168 162 158);
+  margin-bottom: 0.5rem;
+}
+
+.search-result-summary {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgb(168 162 158);
+}
+
+.search-result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.search-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  background-color: rgb(68 64 60);
+  color: rgb(250 250 249);
+  border-radius: 4px;
+}
+
+.search-no-results,
+.search-error {
+  padding: 2rem;
+  text-align: center;
+  color: rgb(168 162 158);
+}
