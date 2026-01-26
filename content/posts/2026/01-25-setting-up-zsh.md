@@ -1,7 +1,7 @@
 +++
 title = 'Prettying up my terminal with ZSH and oh-my-posh'
 date = 2026-01-25T15:33:18+02:00
-draft = true
+draft = false
 toc = true
 tags = ['zsh', 'oh-my-posh', 'terminal', 'dotfiles']
 
@@ -137,6 +137,58 @@ As seen by the last segment (executiontime), we can also add other segments to t
 {{< callout emoji="⚡️" text="I did try to use some of the cli integrations to display the JavaScript package manager, but they were not working as expected. I might come back to this later as it does not select the type per lock-file." >}}
 
 ## Browsing the history with fzf
+
+As mentioned earlier, I kinda...dislike the default history search. Yes, it's there and with `CTRL+R` I can search through some part of the history, but once you have a few commands that are structured similarly, it becomes quite messy to find what I'm looking for.
+
+### Getting the history set up
+
+First we're making sure that the history is properly set up. Check your `.zshrc` for the following lines:
+```bash
+# History
+export HISTFILE=~/.zsh_history
+export HISTSIZE=2000
+export SAVEHIST=2000
+export HISTDUP=false
+export HISTCONTROL=ignoredups
+```
+This will save the history to `~/.zsh_history` with a maximum of 2000 entries (feel free to add more, for me it's more than enough).
+
+{{< callout emoji="⚡️" text="ZFS will start creating the history file after a first exit, so if you don't see it being used, restart your terminal." >}}
+
+### Installing fzf
+
+Next, we need to install [fzf](https://github.com/junegunn/fzf). There are multiple ways to install it, I actually wrote a package manager myself..., but if you're on a debian-based system, the simplest would be the following:
+
+```bash
+sudo apt install fzf
+```
+
+Once installed, we just need to add fzf to our `.zshrc` file:
+```bash
+source <(fzf --zsh)
+```
+
+Et voilà, we can now use fzf to search through our history! There is no new command to learn, since it just maps to the default `CTRL+R` combination.
+
+### Prettify our history
+
+It's a blessing to use, but honestly it's not very pretty. Thankfully, we can customize the search with some nice colors and themes.
+
+My personal pick is usually catppuccin and thankfully they provide a [fzf theme](https://github.com/catppuccin/fzf) :3
+
+"Installation" is simple, in the themes folder of the repo are some script files, which in my case just set an environment variable. For example catpuccin Macchiato:
+```bash
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS" \
+--color=bg+:#363A4F,bg:#24273A,spinner:#F4DBD6,hl:#ED8796 \
+--color=fg:#CAD3F5,header:#ED8796,info:#C6A0F6,pointer:#F4DBD6 \
+--color=marker:#B7BDF8,fg+:#CAD3F5,prompt:#C6A0F6,hl+:#ED8796 \
+--color=selected-bg:#494D64 \
+--color=border:#6E738D,label:#CAD3F5"
+```
+
+Sadly, I didn't find a way to define the theme in a config file, I did however a little addition to the theme provided by catppuccin to not completely override the default options.
+
+This way you could potentially chain multiple options together in different locations of your `.zshrc` file.
 
 ## Verdict
 
