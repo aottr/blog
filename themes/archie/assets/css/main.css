@@ -315,11 +315,19 @@ color: white;
 }
 .highlight pre code[class*='language-shell']::before,
 .highlight pre code[class*='language-bash']::before,
+.highlight pre code[class*='language-zsh']::before,
 .highlight pre code[class*='language-sh']::before {
 content: 'shell';
 background: green;
 color:white
 }
+
+.highlight pre code[class*='language-toml']::before {
+  content: 'toml';
+  background: #9c4221;
+  color: white;
+}
+
 .highlight pre code[class*='language-json']::before{
 content: 'json';
 background: dodgerblue;
