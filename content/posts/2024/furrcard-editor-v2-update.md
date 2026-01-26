@@ -3,6 +3,7 @@ title = 'The FurrCard EditorV2 is finally here'
 date = 2024-08-12T00:09:43+02:00
 draft = false
 tags = ['furrcard']
+description = 'Announcing FurrCard EditorV2 with improved architecture, live previews for pages, multi-card support, and better reactivity. Learn about the new page editor, card management, and upcoming fursona editor features.'
 +++
 
 Refactoring some *old* code can be refreshing. Seriously ! xD (at least for me). So it seemed very close to my mind to take a look at the card editor of [*FurrCard*](https://furrcard.com) again after finishing the majority of features that I implemented. Why tho? Because I felt the code bloated with lots of property-drilling and tons of functionality at the same place.

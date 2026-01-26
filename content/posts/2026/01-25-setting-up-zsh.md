@@ -4,8 +4,8 @@ date = 2026-01-25T15:33:18+02:00
 draft = false
 toc = true
 tags = ['zsh', 'oh-my-posh', 'terminal', 'dotfiles']
-
 tldr = 'Setting up ZSH and oh-my-posh to make my terminal look better and easier to work with.'
+description = 'Complete guide to setting up ZSH with oh-my-posh and fzf for a beautiful, functional terminal. Learn how to configure custom prompts, improve history search, and create a modern terminal experience on Linux and macOS.'
 +++
 
 After many years of using zsh with [powerlevel10k](https://github.com/romkatv/powerlevel10k), switching to [fish](https://fishshell.com/) and then falling back to the default terminal, I've decided to try something new and more up-to-date...

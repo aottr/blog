@@ -5,6 +5,7 @@ draft = false
 tags = ['python', 'hardware']
 images = ['https://i.imgur.com/PZHFKEY.jpg']
 toc = true
+description = 'Step-by-step guide to installing USB-Serial drivers, downloading MicroPython firmware, and flashing it onto ESP32 boards using esptool.py. Get your ESP32 ready for MicroPython development.'
 +++
 
 About 2 years ago, [I wrote a small library](/posts/2021/06-05-ssd1306-display-esp-micropython/) to create menus on an *ESP8266/32* utilising the *SSD1306* OLED Display and MicroPython.

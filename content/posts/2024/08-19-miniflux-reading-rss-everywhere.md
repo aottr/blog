@@ -6,6 +6,7 @@ tags = ['nixos', 'homelab']
 toc = true
 tldr = 'Setting up miniflux is fairly simple, custom css makes the reader very appealing and the many integrations help syncing your progress with different devices.'
 images = ['https://i.imgur.com/KPAQPxo.png']
+description = 'Set up Miniflux RSS reader on NixOS with reverse proxy and SSL. Sync your feeds and reading progress across all devices using Fever API integration. Customize the interface with Catppuccin themes and connect mobile apps like Unread.'
 +++
 
 I'm reading articles and news daily from many different sources. I used to only read them on my phone before sleeping but I also started browsing blogs on my laptop at some point.

@@ -2,6 +2,7 @@
 title = 'Blog Init'
 date = 2024-08-10T15:41:20+02:00
 tags = ['site-update']
+description = 'Introduction to my new blog platform, explaining the motivation for moving away from Medium, Patreon, and Ko-Fi to a self-hosted Hugo-based blog with proper syntax highlighting and minimal overhead.'
 +++
 
 ## What is this blog?

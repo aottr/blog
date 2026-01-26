@@ -4,6 +4,7 @@ date = 2024-08-17T17:18:35+02:00
 draft = false
 toc = true
 tags = ['nixos', 'security', 'homelab']
+description = 'Complete guide to setting up Caddy reverse proxy with SSL certificates on NixOS. Learn how to use ACME with DNS-01 challenge for wildcard certificates, configure services, and secure your homelab services with TLS encryption.'
 +++
 
 ## What is Caddy and why do I use it

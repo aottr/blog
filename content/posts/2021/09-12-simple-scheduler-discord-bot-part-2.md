@@ -4,6 +4,7 @@ date = 2021-09-12T19:31:34+02:00
 draft = false
 tags = ['discord', 'backend']
 images = ['https://storage.ko-fi.com/cdn/useruploads/display/7f6f85de-10e4-419e-933c-d9ea473451e7_screenshot2021-08-16at12.24.33.png']
+description = 'Refactoring the Discord bot scheduler with ES6 classes, method chaining, and a cleaner architecture. Learn how to improve the Task model and Scheduler class for better maintainability and code organization.'
 +++
 
 This is the second part covering the simple scheduler script. In case you didn't read the first part [Writing a simple scheduler for a Discord bot](/posts/2021/08-17-simple-scheduler-discord-bot/) it is encouraged to read it first for the context. Thank you :3

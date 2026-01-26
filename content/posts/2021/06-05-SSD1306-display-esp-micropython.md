@@ -5,6 +5,7 @@ draft = false
 tags = ['hardware', 'python']
 keywords = ['ESP32', 'SSD1306', 'ESP8266', 'micropython']
 images = ['https://storage.ko-fi.com/cdn/useruploads/display/bce49277-59e9-4671-a980-75a3767d60e5_img_2335.jpeg']
+description = 'Learn how to create user interfaces on SSD1306 OLED displays using ESP8266/ESP32 microcontrollers and MicroPython. Introduction to the Syna framework for building menus and UI components with button and rotary encoder support.'
 +++
 
 > ***Disclaimer:*** This article has been imported from Ko-Fi with limited syntax highlighting capabilities and might be updated in the future to better showcase the code.

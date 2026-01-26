@@ -4,6 +4,7 @@ date = 2024-08-22T02:26:05+02:00
 draft = false
 tags = ['security', 'furrcard']
 images = ['https://i.imgur.com/50nTp6m.png']
+description = 'Learn how to verify links on your Mastodon profile by adding rel="me" attributes to your website. Step-by-step guide for websites, GitHub profiles, and third-party services like FurrCard to get verified profile links.'
 +++
 
 Some of you might use *Mastodon*, have an account there or at least heard of it. One feature of a mastodon profile is the *Profile metadata*, which lets you add all kinds of text and links to your profile.

@@ -4,8 +4,8 @@ date = 2024-08-18T15:33:18+02:00
 draft = false
 toc = true
 tags = ['nixos', 'security', 'homelab']
-
 tldr = 'While round robin DNS works, split DNS feels more sophisticated and is easy to set up.'
+description = 'Configure split DNS with Tailscale VPN and Unbound on NixOS to access homelab services using the same domain names both locally and remotely. Learn how to set up restricted nameservers for seamless VPN access.'
 +++
 
 Yesterday, I showed [how I set up my home server with caddy to retrieve SSL certificates](/posts/2024/08/homelab-setting-up-caddy-reverse-proxy-with-ssl-on-nixos/) and serve my self-hosted 

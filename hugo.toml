@@ -23,11 +23,17 @@ enableEmoji = true
 	mode="dark" # color-mode → light,dark,toggle or auto
 	useCDN=true # don't use CDNs for fonts and icons, instead serve them locally.
 	subtitle = "Thoughts on software development, data science, and other things."
+	description = "Thoughts on software development, data science, and other things." # Used for SEO meta description
+	author = "A. Ottr" # Author name for SEO and structured data
 	mathjax = false # enable MathJax support
 	katex = false # enable KaTeX support
     customcss = ["css/main_overrides.css", "css/dark_overrides.css"]
   
+  # SEO: Add a default Open Graph image (1200x630px recommended)
+  # og_image = "/img/og-image.png"
   og_image = ""
+  # SEO: Add a favicon (32x32px or 16x16px)
+  # favicon = "/favicon.ico"
   favicon = ""
 
 [[params.social]]
@@ -77,3 +83,10 @@ weight = 4
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+
+# Enable sitemap generation
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"

@@ -4,6 +4,7 @@ date = 2021-08-17T18:54:43+02:00
 draft = false
 tags = ['discord', 'backend']
 images = ['https://storage.ko-fi.com/cdn/useruploads/display/7f6f85de-10e4-419e-933c-d9ea473451e7_screenshot2021-08-16at12.24.33.png']
+description = 'Build a global task scheduler for Discord bots in JavaScript to manage recurring actions and scheduled messages. Learn how to create a Task model with due dates and intervals, avoiding multiple setTimeout/setInterval calls.'
 +++
 
 {{<figure src="https://storage.ko-fi.com/cdn/useruploads/display/7f6f85de-10e4-419e-933c-d9ea473451e7_screenshot2021-08-16at12.24.33.png">}}

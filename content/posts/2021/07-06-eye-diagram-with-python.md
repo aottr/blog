@@ -4,6 +4,7 @@ date = 2021-07-05T17:46:39+02:00
 draft = false
 tags = ['python']
 images = ['https://storage.ko-fi.com/cdn/useruploads/display/061e0a6f-dbca-406e-85da-68ae3010419e_screenshot2021-07-04at17.20.47.png']
+description = 'Tutorial on analyzing USB transmission voltage data and creating eye diagrams using Python, NumPy, and Matplotlib. Learn how to overlap signal symbols and generate heat maps to determine optimal sampling positions.'
 +++
 
 {{<figure src="https://storage.ko-fi.com/cdn/useruploads/display/061e0a6f-dbca-406e-85da-68ae3010419e_screenshot2021-07-04at17.20.47.png" title="Drawing an eye diagram with Python">}}

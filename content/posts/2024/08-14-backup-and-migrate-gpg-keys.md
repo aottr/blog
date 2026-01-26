@@ -4,6 +4,7 @@ date = 2024-08-14T00:27:52+02:00
 draft = false
 toc = true
 tags = ['gpg', 'security']
+description = 'Complete guide to exporting, backing up, and migrating GPG keys between machines. Learn how to export public and private keys, restore trust levels, and create encrypted backups using password-protected archives or AES-256 encryption.'
 +++
 
 Have you ever heard about GPG (or GnuPG)? Yes? Gooood :3 No? Give it a quick search and check it out, it can be some nerd fun.
