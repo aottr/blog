@@ -126,6 +126,84 @@ Now your static configuration is set up. An example of my static configuration c
 
 ## Adding a service to Traefik
 
+To add a new NixOS service (or container, etc.) to our new reverse proxy, we just need to extend the `dynamicConfigOptions` of our Traefik service, preferably where we also define the service that we want to expose.
+
+{{< callout emoji="⚡️" text="Configurations in NixOS will be merged with already existing configurations in the order they are defined / imported. We can therefore extend the config by creating new service configurations in other modules." >}}
+
+Let's take a service I want to expose via Traefik, my *paperless-ngx* service.
+```nix {hl_lines=["8-12"]}
+{ config, ... }:
+{
+  ...
+  services.paperless = {
+    enable = true;
+    ...
+  };
+}
+```
+
+Now we can extend the dynamic config of our Traefik service to add the service to the routing.
+```nix {hl_lines=["4-8"]}
+{ config, ... }:
+{
+  ...
+  services.traefik.dynamicConfigOptions.http = {
+    services.paperless.loadBalancer.servers = [
+      {url = "http://localhost:${toString config.services.paperless.port}";}
+    ];
+  };
+}
+```
+
+We gonna start by creating a new service for *paperless* by writing a new `dynamicConfigOptions.http` block inside our Traefik service. We don't need much config in this example, we just create a new Traefik service `paperless` and point it to the internal address of the paperless.
+
+We don't even care what port *paperless* is running on, since we can use it from the NixOS service configuration directly. If you assigned a custom port to *paperless* in your NixOS config, this will also be respected.
+
+Next step is to create a new router for our new service.
+```nix {hl_lines=["5-10"]}
+{ config, ... }:
+{
+  ...
+  services.traefik.dynamicConfigOptions.http = {
+    routers.paperless = {
+      entryPoints = ["websecure"];
+      service = "paperless";
+      rule = "Host(`documents.otter.place`)";
+      tls.certResolver = "letsencrypt";
+    };
+    services.paperless.loadBalancer.servers = [
+      {url = "http://localhost:${toString config.services.paperless.port}";}
+    ];
+  };
+}
+```
+
+## Accessing the Traefik dashboard
+
+One thing that most people prefer on Traefik, compared to other reverse proxies like nginx or Caddy, is the built-in dashboard. Although this can be enabled in the static config with an unencrypted connection on port `8080`, I'd not recommend it even in a homelab environment.
+
+Reason for that is, that the dashboard port **can not be changed** to another port, unless you create a router for the dashboard...which in my opinion negates the purpose of using the insecure option in the first place. I might want to expose other services on that port, not my reverse proxy dashboard...
+
+Thankfully, creating a router is quite easy in NixOS. For this we create a `dynamicConfigOptions` block inside our traefik service and define a router for the dashboard.
+```nix {hl_lines=["6-11"]}
+{ pkgs, config, ... }:
+{
+  ...
+  services.traefik = {
+    ...
+    dynamicConfigOptions.http.routers.dashboard = {
+      entryPoints = [ "websecure" ];
+      rule = "Host(`traefik.your.domain.com`)";
+      service = "api@internal";
+      tls.certResolver = "letsencrypt";
+    };
+  };
+  ...
+}
+```
+
+The service will now request a certificate for the dashboard domain `traefik.your.domain.com` via *letsencrypt* and the dashboard will be available.
+
 ### Troubleshooting
 
 #### Traefik has issues with the certificate resolver
