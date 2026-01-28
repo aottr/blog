@@ -11,11 +11,11 @@ Remember how [I mentioned](/posts/2024/08-17-caddy-tls-nixos/), that I never rea
 
 ## What is Traefik and why do I use it
 
-*Sounds familiar yet?* Sorry... [Traefik](https://doc.traefik.io/traefik/) is a modern reverse proxy and load balancer that makes it easy to deploy and manage your services. It's written in Go (like Caddy)and was designed to be relatively easy to configure for container applications.
+*Sounds familiar yet?* Sorry... [Traefik](https://doc.traefik.io/traefik/) is a modern reverse proxy and load balancer that makes it easy to securely access your services via a domain name. It's written in Go (like Caddy) and was designed to be relatively easy to configure for container applications.
 
 It shares many similar features with Caddy, like the ability to request certificates automatically. The learning curve is (*in my opinion*) slightly steeper than Caddy, but the possibilities for a seemless integration in NixOS (or any containerized environment) are quite nice.
 
-Don't get me wrong, I'm still using Caddy for environments where the simplicity overshadows the features that I don't use anyway. But in the Homelab space, where we often use [DNS-01 challenges](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) for certificates and Docker stacks for services, Traefik is a great fit.
+Don't get me wrong, I'm still using Caddy for environments where the simplicity overshadows the features that I don't use anyway. But in the Homelab space, where we often use [DNS-01 challenges](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) for certificates and Docker stacks for services since we don't want to expose them to the internet, Traefik is a great fit.
 
 Why am I mentioning Docker in an article about NixOS? Well, Traefik is often mentioned in the context of Docker and Kubernetes, but in the end it's just a powerful reverse proxy. Not as powerful as nginx in terms of edge-case features, but that's another story...
 
@@ -75,7 +75,7 @@ If not done so already in your NixOS configuration, you should open the firewall
 
 The startup configuration is basically defining the base of Traefik like the entrypoints (ports Traefik will listen on) certificate resolvers, providers and other basic settings. [Providers](https://doc.traefik.io/traefik/reference/install-configuration/providers/overview/) are basically an interface for traefik to retrieve routing information from other sources like Docker, Kubernetes, etc. Since we want our routing to be deterministic!!, we're going straight to the definition of the next point: [Certificates Resolvers](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/overview/).
 
-### Setting up a certificate resolver for DNS-01 challenges
+### Setting up a certificate resolver for `DNS-01` challenges
 
 **Hint:** Please refer to my [Appendix about Encrypting secrets with agenix](/posts/2024/08-17-caddy-tls-nixos/#appendix-encrypting-secrets-with-agenix) for more information on how to encrypt secrets with agenix, as I don't want to encourage anyone to write plain-text passwords in their configuration.
 
@@ -99,7 +99,7 @@ The config block for the certificate resolver is nested inside the `staticConfig
   ...
 }
 ```
-As usual, we need to give letsencrypt our email address. Additionally is the Traefik service asking for a storage path for the ACME account and certificate information. The `dnschallenge.provider` is the provider that Traefik will use to get the DNS-01 challenge information. This can be any provider that Traefik supports, but I'm using Cloudflare for my domain. Traefik is using the [lego](https://go-acme.github.io/lego/) library to handle challenges, they [support many different providers](https://go-acme.github.io/lego/dns/index.html) out of the box and even allow you to [write your own](https://go-acme.github.io/lego/usage/library/writing-a-challenge-solver/). (If you're into this kind of stuff)
+As usual, we need to give letsencrypt our email address. Additionally is the Traefik service asking for a storage path for the `ACME` account and certificate information. The `dnschallenge.provider` is the provider that Traefik will use to get the `DNS-01` challenge information. This can be any provider that Traefik supports, but I'm using Cloudflare for my domain. Traefik is using the [lego](https://go-acme.github.io/lego/) library to handle challenges, they [support many different providers](https://go-acme.github.io/lego/dns/index.html) out of the box and even allow you to [write your own](https://go-acme.github.io/lego/usage/library/writing-a-challenge-solver/). (If you're into this kind of stuff)
 
 In order to use the [DNS-01 challenge with cloudflare](https://go-acme.github.io/lego/dns/cloudflare/index.html#credentials), we need to set up a [cloudflare API token](https://dash.cloudflare.com/profile/api-tokens) with the permission `Zone.DNS` for our domain and set the token as an environment variable with the key `CLOUDFLARE_API_TOKEN`.
 
@@ -191,6 +191,39 @@ Next step is to create a new router for our new service.
 After rebuilding your NixOS configuration, you should be able to access *paperless* at `https://documents.your.domain.com`. Easy, wasn't it?
 
 You can also combine multiple services and routers in one block, like I did in [my config for Home Assistant and Zigbee2MQTT](https://codeberg.org/aottr/otterden/src/commit/d854550ab58280d23120243c07df1867e89e85d3/modules/nixos/server/home-assistant.nix), where Home Assistant is an `oci-container` using podman and Zigbee2MQTT a nixos service.
+
+Here another full example of an `uptime-kuma` configuration:
+
+```nix {hl_lines=["12-23"]}
+{ pkgs, config, lib, ... }:
+{
+  services.uptime-kuma = {
+    enable = true;
+    settings = {
+      PORT = "48080";
+      UPTIME_KUMA_DB_TYPE = "sqlite";
+    };
+  };
+
+  services.traefik.dynamicConfigOptions = lib.mkIf config.services.traefik.enable {
+    http = {
+      routers.uptime-kuma = {
+        rule = "Host(`uptime.your.domain.com`)";
+        service = "uptime-kuma";
+        tls.certResolver = "letsencrypt";
+      };
+      services.uptime-kuma = {
+        loadBalancer.servers = [{
+          url = "http://localhost:48080";
+        }];
+      };
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = lib.mkIf (!config.services.traefik.enable) [ 48080 ];
+}
+```
+Here I even allow the port in the firewall and don't extend the Traefik config if Traefik is not enabled. (Just as a small example what you can do).
 
 ## Accessing the Traefik dashboard
 
