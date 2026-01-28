@@ -1,10 +1,10 @@
 +++
 title = 'Homelab: Setting up Traefik Reverse Proxy with SSL on NixOS'
 date = 2025-05-18T17:18:35+02:00
-draft = true
+draft = false
 toc = true
 tags = ['nixos', 'security', 'homelab']
-description = 'Complete guide to setting up Traefik reverse proxy with SSL certificates on NixOS. Learn how to use ACME with DNS-01 challenge for wildcard certificates, configure services, and secure your homelab services with TLS encryption.'
+description = 'Complete guide to setting up Traefik reverse proxy with SSL certificates on NixOS. Learn how to use ACME with DNS-01 challenge for air-gapped certificates, configure services, and secure your homelab services with TLS encryption.'
 +++
 
 Remember how [I mentioned](/posts/2024/08-17-caddy-tls-nixos/), that I never really got *"warm"* with Traefik? Well, I'm still not, but at some point in time I fell for my auto-renewal not working correctly and gave it another shot.
@@ -60,6 +60,16 @@ We're interested in the DNS challenge tho, or at least I was. The base setup is 
 The configuration of Traefik is split into two parts, the static configuration `staticConfigOptions` and the dynamic configuration `dynamicConfigOptions`. For now we're only interested in the static configuration and setting up the entrypoints.
 
 Those configuration types have recently been renamed to `startup` and `routing` configuration, which makes a lot more sense. 
+
+{{< callout emoji="💡" text="Don't forget to configure the firewall to allow traffic to the Traefik ports (80 and 443)!" >}}
+
+If not done so already in your NixOS configuration, you should open the firewall ports `80` and `443` for Traefik.
+```nix
+{ pkgs, config, ... }:
+{
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+}
+```
 
 ### The static (startup) configuration
 
@@ -168,7 +178,7 @@ Next step is to create a new router for our new service.
     routers.paperless = {
       entryPoints = ["websecure"];
       service = "paperless";
-      rule = "Host(`documents.otter.place`)";
+      rule = "Host(`documents.your.domain.com`)";
       tls.certResolver = "letsencrypt";
     };
     services.paperless.loadBalancer.servers = [
@@ -177,6 +187,10 @@ Next step is to create a new router for our new service.
   };
 }
 ```
+
+After rebuilding your NixOS configuration, you should be able to access *paperless* at `https://documents.your.domain.com`. Easy, wasn't it?
+
+You can also combine multiple services and routers in one block, like I did in [my config for Home Assistant and Zigbee2MQTT](https://codeberg.org/aottr/otterden/src/commit/d854550ab58280d23120243c07df1867e89e85d3/modules/nixos/server/home-assistant.nix), where Home Assistant is an `oci-container` using podman and Zigbee2MQTT a nixos service.
 
 ## Accessing the Traefik dashboard
 
@@ -203,6 +217,10 @@ Thankfully, creating a router is quite easy in NixOS. For this we create a `dyna
 ```
 
 The service will now request a certificate for the dashboard domain `traefik.your.domain.com` via *letsencrypt* and the dashboard will be available.
+
+I hope this little guide helped you to get started with Traefik on NixOS. I didn't plan to "migrate" from Caddy initially, but I don't regret it due to the cleaner config interface and automatic certificate renewal that didn't fail me yet. ^^"
+
+Feel free to leave a comment below and check out my other nix-configs on [Codeberg](https://codeberg.org/aottr/otterden/src/branch/v2).
 
 ### Troubleshooting
 
