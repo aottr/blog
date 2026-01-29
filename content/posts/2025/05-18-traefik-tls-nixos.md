@@ -75,7 +75,7 @@ If not done so already in your NixOS configuration, you should open the firewall
 
 The startup configuration is basically defining the base of Traefik like the entrypoints (ports Traefik will listen on) certificate resolvers, providers and other basic settings. [Providers](https://doc.traefik.io/traefik/reference/install-configuration/providers/overview/) are basically an interface for traefik to retrieve routing information from other sources like Docker, Kubernetes, etc. Since we want our routing to be deterministic!!, we're going straight to the definition of the next point: [Certificates Resolvers](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/overview/).
 
-### Setting up a certificate resolver for `DNS-01` challenges
+### Setting up a certificate resolver for DNS-01 challenges
 
 **Hint:** Please refer to my [Appendix about Encrypting secrets with agenix](/posts/2024/08-17-caddy-tls-nixos/#appendix-encrypting-secrets-with-agenix) for more information on how to encrypt secrets with agenix, as I don't want to encourage anyone to write plain-text passwords in their configuration.
 
