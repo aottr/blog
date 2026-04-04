@@ -131,7 +131,7 @@ Again as an export, so we can call it directly from the include, we utilise the 
 That's it basically. We also have to export the Task class to use it in our code. Here is our Scheduler implemented in LexBot for demonstration / later reference.
 {{< gist aottr 8c869e4869e54a63f7027eabd1346b0b >}}
 
-# How are we gonna use it in our Discord bot?
+## How are we gonna use it in our Discord bot?
 Assuming we're inside the main file of our Discord bot, already included the discord.js package and instantiated a Client, we just include our scheduler.js file and assign it to a variable, e.g. `scheduler`. 
 
 ```js

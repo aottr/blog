@@ -650,6 +650,11 @@ video {
   height: 1.25rem;
 }
 
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -674,6 +679,10 @@ video {
   flex-direction: column;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -684,6 +693,20 @@ video {
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.fill-current {
+  fill: currentColor;
 }
 
 .stroke-current {
@@ -775,7 +798,11 @@ footer {
   color: rgb(168 162 158 / var(--tw-text-opacity));
 }
 
-header h1 a, header h1 a:visited {
+header .site-title {
+  margin: 0px;
+}
+
+header .site-title a, header .site-title a:visited {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -784,7 +811,17 @@ header h1 a, header h1 a:visited {
   color: rgb(249 168 212 / var(--tw-text-opacity));
 }
 
-header h1, header h1::before {
+/* Match global a:hover; .site-title adds a class so base link color was beating a:hover (pink on pink). */
+
+header .site-title a:hover,
+header .site-title a:visited:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 168 212 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(28 25 23 / var(--tw-text-opacity));
+}
+
+header .site-title, header .site-title::before {
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
@@ -835,13 +872,6 @@ header nav ul li svg:hover {
 header nav ul li svg {
   height: 1.75rem;
   width: 1.75rem;
-}
-
-/* Hide Home link on mobile */
-@media (max-width: 767px) {
-  header nav ul > li:first-of-type {
-    display: none;
-  }
 }
 
 a:visited {

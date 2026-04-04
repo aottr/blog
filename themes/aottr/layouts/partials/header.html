@@ -1,4 +1,4 @@
-<h1>
+<p class="site-title">
     <a href="{{ absURL "/" }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee">
             <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
@@ -9,6 +9,6 @@
         </svg>
         {{ site.Title }}
     </a>
-</h1>
+</p>
 {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
 {{ partial "search.html" . }}

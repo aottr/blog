@@ -30,11 +30,19 @@ footer {
     @apply w-full max-w-4xl mx-auto p-4;
     @apply text-stone-400 text-sm;
 }
-header h1 a, header h1 a:visited {
+header .site-title {
+    @apply m-0;
+}
+header .site-title a, header .site-title a:visited {
     @apply flex flex-row items-center gap-2;
     @apply text-pink-300;
 }
-header h1, header h1::before {
+/* Match global a:hover; .site-title adds a class so base link color was beating a:hover (pink on pink). */
+header .site-title a:hover,
+header .site-title a:visited:hover {
+    @apply bg-pink-300 text-stone-900;
+}
+header .site-title, header .site-title::before {
     @apply text-2xl font-bold;
     content: none;
 }

@@ -10,7 +10,7 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 paginate = 10 # articles per page
-summaryLength = 20
+summaryLength = 30
 
 disableHugoGeneratorInject = true
 enableGitInfo = false

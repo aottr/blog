@@ -3,7 +3,8 @@
 <link href="https://woof.tech/@aottr" rel="me" />
 
 {{- /* Title */ -}}
-<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+{{- $homeTitle := printf "%s — %s" site.Title (site.Params.subtitle | default site.Params.description | plainify | truncate 48) -}}
+<title>{{ if .IsHome }}{{ $homeTitle }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 
 {{- /* Meta Description */ -}}
 {{- $description := "" -}}
@@ -19,7 +20,7 @@
 
 {{- /* Open Graph / Facebook */ -}}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ $homeTitle }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ $description | truncate 160 | plainify }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Title }}">
@@ -54,7 +55,7 @@
 
 {{- /* Twitter Card */ -}}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $homeTitle }}{{ else }}{{ .Title }}{{ end }}">
 <meta name="twitter:description" content="{{ $description | truncate 160 | plainify }}">
 {{- if .IsPage -}}
   {{- $twitterImage := "" -}}
@@ -74,7 +75,10 @@
 {{- if isset .Site.Params "social" -}}
   {{- range .Site.Params.social -}}
     {{- if eq .name "Twitter" -}}
-<meta name="twitter:site" content="{{ .url | replaceRE "^https?://(www\\.)?(twitter|x)\\.com/" "@" }}">
+      {{- $tw := .url | strings.TrimSuffix "/" | replaceRE "^https?://(www\\.)?(twitter|x)\\.com/" "@" | strings.TrimSuffix "/" -}}
+      {{- if hasPrefix $tw "@" -}}
+<meta name="twitter:site" content="{{ $tw }}">
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -98,42 +102,32 @@
   {{- printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
 {{- end -}}
 
-{{- /* Structured Data (JSON-LD) */ -}}
+{{- /* Structured Data (JSON-LD) — safeJS keeps jsonify output from being re-escaped in script context */ -}}
 {{- if .IsPage -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ ($description | truncate 160 | plainify) | jsonify }},
-  "url": {{ .Permalink | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
-  "author": {
-    "@type": "Person",
-    "name": {{ .Site.Params.author | default site.Title | jsonify }},
-    "url": {{ if isset .Site.Params "social" }}{{ if gt (len .Site.Params.social) 0 }}{{ (index .Site.Params.social 0).url | jsonify }}{{ else }}{{ site.BaseURL | jsonify }}{{ end }}{{ else }}{{ site.BaseURL | jsonify }}{{ end }}
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": {{ site.Title | jsonify }},
-    "url": {{ site.BaseURL | jsonify }}
-  }{{ if isset .Params "images" }},
-  "image": {{ (index .Params.images 0 | absURL) | jsonify }}{{ else if isset .Site.Params "og_image" }}{{ if .Site.Params.og_image }},
-  "image": {{ (.Site.Params.og_image | absURL) | jsonify }}{{ end }}{{ end }}
-}
-</script>
+  {{- $authorURL := site.BaseURL -}}
+  {{- if and (isset .Site.Params "social") (gt (len .Site.Params.social) 0) -}}
+    {{- $authorURL = (index .Site.Params.social 0).url -}}
+  {{- end -}}
+  {{- $dateMod := cond (not .Lastmod.IsZero) .Lastmod .Date -}}
+  {{- $author := dict "@type" "Person" "name" (.Site.Params.author | default site.Title) "url" $authorURL -}}
+  {{- $publisher := dict "@type" "Organization" "name" site.Title "url" site.BaseURL -}}
+  {{- $blog := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" .Title "description" ($description | truncate 160 | plainify) "url" .Permalink "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" ($dateMod.Format "2006-01-02T15:04:05Z07:00") "author" $author "publisher" $publisher -}}
+  {{- if isset .Params "images" -}}
+    {{- $blog = merge $blog (dict "image" (index .Params.images 0 | absURL)) -}}
+  {{- else if and (isset .Site.Params "og_image") .Site.Params.og_image -}}
+    {{- $blog = merge $blog (dict "image" (.Site.Params.og_image | absURL)) -}}
+  {{- end -}}
+<script type="application/ld+json">{{ $blog | jsonify | safeJS }}</script>
 {{- else -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": {{ site.Title | jsonify }},
-  "url": {{ site.BaseURL | jsonify }},
-  "description": {{ ($description | truncate 160 | plainify) | jsonify }}{{ if isset .Site.Params "social" }},
-  "sameAs": [{{ range $index, $social := .Site.Params.social }}{{ if $index }}, {{ end }}{{ $social.url | jsonify }}{{ end }}]{{ end }}
-}
-</script>
+  {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" site.BaseURL "description" ($description | truncate 160 | plainify) -}}
+  {{- if isset .Site.Params "social" -}}
+    {{- $sameAs := slice -}}
+    {{- range .Site.Params.social -}}
+      {{- $sameAs = $sameAs | append .url -}}
+    {{- end -}}
+    {{- $website = merge $website (dict "sameAs" $sameAs) -}}
+  {{- end -}}
+<script type="application/ld+json">{{ $website | jsonify | safeJS }}</script>
 {{- end -}}
 
 {{ partialCached "head/css.html" . }}
