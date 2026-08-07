@@ -1,0 +1,30 @@
+when:
+  - event: ['push']
+    branch: ['main']
+
+engine: 'nixery'
+dependencies:
+  nixpkgs: [hugo, dart-sass, git, coreutils, curl, glibc]
+
+environment:
+  SITE_PATH: 'public'
+  SITE_NAME: 'aottr-dev'
+  SITE_URL: 'https://aottr.wisp.place'
+  WISP_HANDLE: 'aottr.dev'
+  HUGO_ENVIRONMENT: 'production'
+  HUGO_CACHEDIR: '/tmp/hugo_cache'
+  TZ: 'Europe/Paris'
+
+steps:
+  - name: build
+    command: |
+      export PATH="$HOME/.nix-profile/bin:$PATH"
+      hugo --gc --minify --baseURL "https://$SITE_URL/"
+  - name: deploy
+    command: |
+      curl https://sites.wisp.place/nekomimi.pet/wisp-cli-binaries/wisp-cli-x86_64-linux -o wisp-cli
+      chmod +x wisp-cli
+      ./wisp-cli deploy "$WISP_HANDLE" \
+        --path "$SITE_PATH" \
+        --site "$SITE_NAME" \
+        --password "$WISP_APP_PASSWORD"
