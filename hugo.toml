@@ -9,7 +9,8 @@ pygmentsstyle = "monokai"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-paginate = 10 # articles per page
+[pagination]
+  pagerSize = 10
 summaryLength = 30
 
 disableHugoGeneratorInject = true
